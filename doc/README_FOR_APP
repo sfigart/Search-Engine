@@ -1,2 +1,57 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+
+redis installed at c:\code\csc575\redis-2.4.8
+CLI > redis-cli MONITOR
+
+Flush all keys
+> redis-cli FLUSHALL
+
+~~~~~~~~~~ Memcache
+
+brew install memcached
+
+-- http://devcenter.heroku.com/articles/memcache
+
+start memcahced: memcached -vv
+
+rails use gem Dalli
+
+
+rails.cache commands
+
+Rails.cache.read
+Rails.cache.write
+Rails.cache.fetch
+Rails.cache.delete
+Rails.cache.exist?
+Rails.cache.increment
+Rails.cache.decrement
+Rails.cache.clear
+
+HADOOP installed:
+~/Library/Hadoop
+
+start-dfs.sh
+start-mapred.sh
+
+stop-dfs.sh
+stop-mapred.sh
+
+http://mrflip.github.com/wukong/usage.html#playnice
+your/script.rb --run=local path/to/input_files path/to/output_dir
+
+
+Mongo - installed by brew
+start mongod --rest
+port: 27017
+web: 28017
+
+# Find all not visited
+Webpage.all(:visited => nil)
+
+
+Rails 3 & Mongo
+https://github.com/tyrauber/mongodb-rails3-tutorial
+script/rails generate mongo_mapper:config

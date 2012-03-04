@@ -1,5 +1,3 @@
-#require 'mongo_mapper'
-
 # rake crawler:not_visited[todo.txt]
 namespace :crawler do
   task :not_visited, [:filename] => :environment do |t, args|
@@ -13,5 +11,22 @@ namespace :crawler do
       file.puts page.url
     end
     file.close
+  end
+
+  task :update_visited, [:filename] => :environment do |t, args|
+    args.with_defaults(:filename => "links_found.txt")
+
+    puts "Updating visited from #{args.filename}"
+
+    file = File.open(args.filename, 'r')
+    while (line = file.gets)
+      key, value = line.chomp.split("\t")
+      puts "key #{key}, value: #{value}"
+      unless Page.exists?(:url => key)
+        Page.create(:url => key)
+      end
+    end
+    file.close
+
   end
 end

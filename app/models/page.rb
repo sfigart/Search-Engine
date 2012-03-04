@@ -1,6 +1,9 @@
+# REMEMBER TO UPDATE ./mapreduce/crawler.rb definition if you
+# change this substantially
 class Page
   include MongoMapper::Document
 
+  key :docid, String
   key :name, String
   key :url, String
   key :visited, Boolean
@@ -12,7 +15,7 @@ class Page
 
   # Returns all models where visited is not true
   def self.not_visited
-    Page.all(:visited => nil)
+    Page.all(:visited => [false, nil])
   end
 
   def visit

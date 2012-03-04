@@ -5,7 +5,8 @@ namespace :db do
     end
     task :mongo => :environment do
       puts "mongo with environment"
-      puts Page.all
+      Page.create(:name => "Digg", :url => "http://digg.com")
+      puts Page.all.size
     end
   end
 end

@@ -1,4 +1,8 @@
 SearchEngine::Application.routes.draw do
+  get "search/index"
+  get "admin/index"
+  root :to => 'search#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

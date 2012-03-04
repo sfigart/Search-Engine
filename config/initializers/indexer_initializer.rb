@@ -1,0 +1,5 @@
+require 'indexer/dictionary'
+require 'indexer/parse'
+require 'indexer/posting'
+require 'indexer/stopwords'
+require 'indexer/token'

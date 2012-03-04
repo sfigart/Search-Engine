@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.2'
-gem 'mongo_mapper'
-gem 'bson_ext'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,10 +28,24 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+# Mongo
+gem 'mongo_mapper'
+gem 'bson_ext'
+
+# Memcached client
+gem 'dalli', '~>1.1.5'
+
+# Indexer
+gem 'nokogiri', '~>1.5.0'
+gem 'stemmify', '~>0.0.2'
+
+# Bootstrap
+gem 'twitter-bootstrap-rails'

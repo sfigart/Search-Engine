@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="span12">
+    <%= form_tag '/', :method => "get", :class => 'well form-search' do %>
+      <%= label_tag :q, "Search for :" %>
+      <%= text_field_tag :q, nil, :size => 55, :maxlength => 2048  %>
+      <%= submit_tag "Search"  %>
+    <% end %>
+  </div>
+</div><!--/row-->
+
+<% if @results.present? %>
+
+  <div class="row">
+    <div class="span12">
+      Search Results for <%= h @q %>
+    </div>
+  </div><!--/row-->
+
+  <%= render :partial => 'shared/terms', :locals => {:terms => @results } %>
+
+<% end %>

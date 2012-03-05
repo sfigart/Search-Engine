@@ -1,5 +1,6 @@
 # rake crawler:not_visited[todo.txt]
 namespace :crawler do
+  desc 'Generate list of sites to crawl'
   task :not_visited, [:filename] => :environment do |t, args|
     args.with_defaults(:filename => "to_visit.txt")
 

@@ -49,3 +49,6 @@ gem 'stemmify', '~>0.0.2'
 
 # Bootstrap
 gem 'twitter-bootstrap-rails'
+
+gem 'inverted_index'
+gem 'hpricot'

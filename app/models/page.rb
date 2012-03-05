@@ -10,6 +10,7 @@ class Page
   key :last_visited, Date
   key :last_visited_status_code
   key :html, String
+  key :indexed, Boolean
 
   timestamps!
 
@@ -18,6 +19,7 @@ class Page
     Page.all(:visited => [false, nil])
   end
 
-  def visit
+  def self.not_indexed
+    Page.where(:indexed => [false, nil], :visited => true).fields(:docid)
   end
 end

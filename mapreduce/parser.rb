@@ -70,7 +70,7 @@ class ParseMapper < Wukong::Streamer::LineStreamer
 
     # Yield
     tokens.each_with_index do |token, index|
-      yield [token, page.docid, index]
+      yield [token.downcase, page.docid, index]
     end
   end
 end
@@ -90,13 +90,17 @@ class ParseReducer < Wukong::Streamer::AccumulatingReducer
   def accumulate term, docid, index
     @frequency += 1
     @positions << index
+    Log.info("#{key} Accumulated : #{@positions.join(', ')}")
   end
 
   def finalize
-    sorted_index_locations = @positions.sort
-    yield [ key, @frequency, sorted_index_locations.join("|") ]
+    Log.info ("#{key} finalize : #{@positions.join(', ')}")
+    yield [ key, @frequency, @positions.join("^") ]
   end
 end
 
-#Wukong::Script.new(ParseMapper, nil).run
-Wukong::Script.new(ParseMapper, ParseReducer).run
+# Need to partition AND SORT !!! using term, docid
+Wukong::Script.new(ParseMapper,
+                   ParseReducer,
+                   :partition_fields => 2,
+                   :sort_fields => 2).run

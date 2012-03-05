@@ -12,7 +12,7 @@ namespace :parser do
 
     # TODO: Remove [0..1000] limit!!
     file = File.open(args.filename, 'w')
-    docids[0..1000].each {|docid| file.puts docid}
+    docids[0..100].each {|docid| file.puts docid}
     file.close
   end
 end

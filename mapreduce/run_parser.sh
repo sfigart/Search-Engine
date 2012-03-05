@@ -5,19 +5,19 @@ rake parser:not_indexed[to_parse.txt]
 # Clear up previous run
 hadoop fs -rmr /user/sfigart/parser
 hadoop fs -rm /user/sfigart/to_parse.txt
-rm links_found.txt
+rm term_doc_freq.txt
 
 # Copy this run (sites to visit)
 hadoop fs -put ./to_parse.txt /user/sfigart/
 
 # Run map reduce in Hadoop
-#./mapreduce/crawler.rb --run=hadoop /user/sfigart/to_parse.txt /user/sfigart/parser
+./mapreduce/parser.rb --run=hadoop /user/sfigart/to_parse.txt /user/sfigart/parser
 
 # Run map reduce on the file (LOCAL NON HADOOP)
-./mapreduce/parser.rb --run=local to_parse.txt links_found.txt
+#./mapreduce/parser.rb --run=local to_parse.txt term_doc_freq.txt
 
 # Copy results out of hadoop
-#hadoop fs -getmerge /user/sfigart/crawler links_found.txt addnl
+hadoop fs -getmerge /user/sfigart/parser term_doc_freq.txt addnl
 
 # Process visited
 #rake crawler:update_visited[links_found.txt]

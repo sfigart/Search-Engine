@@ -1,7 +1,7 @@
 #!/usr/bin/env /Users/sfigart/.rvm/rubies/ruby-1.9.3-p125/bin/ruby
 require 'rubygems'
 
-ENV['GEM_PATH'] = "/Users/sfigart/.rvm/gems/ruby-1.9.3-p125@rails-3.2.2:/Users/sfigart/.rvm/gems/ruby-1.9.3-p125@global"
+ENV['GEM_PATH'] = "/Users/sfigart/.rvm/gems/ruby-1.9.3-p125:/Users/sfigart/.rvm/gems/ruby-1.9.3-p125@global"
 Gem.clear_paths
 
 require 'digest/sha1'

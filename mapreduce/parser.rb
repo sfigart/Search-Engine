@@ -1,12 +1,13 @@
 #!/usr/bin/env /Users/sfigart/.rvm/rubies/ruby-1.9.3-p125/bin/ruby
 require 'rubygems'
 
-ENV['GEM_PATH'] = "/Users/sfigart/.rvm/gems/ruby-1.9.3-p125@rails-3.2.2:/Users/sfigart/.rvm/gems/ruby-1.9.3-p125@global"
+ENV['GEM_PATH'] = "/Users/sfigart/.rvm/gems/ruby-1.9.3-p125:/Users/sfigart/.rvm/gems/ruby-1.9.3-p125@global"
 Gem.clear_paths
 
 require 'wukong'
 require 'mongo_mapper'
 require 'inverted_index'
+require 'stemmify'
 
 class Page
   include MongoMapper::Document
@@ -23,34 +24,79 @@ class Page
 end
 
 # /parser.rb --run=local ./to_parse.txt out
-class LinkMapper < Wukong::Streamer::LineStreamer
+class ParseMapper < Wukong::Streamer::LineStreamer
   def process docid
 
     MongoMapper.connection = Mongo::Connection.new('localhost')
     MongoMapper.database = 'search_engine_development'
 
-    # Get html
+    # Parse html
     page = Page.first(:docid => docid)
 
     parser = InvertedIndex::Parse.new(page.html)
-    
-    yield [doc.docid, 1]
+    parser.parse
+    tokens = parser.tokens
+
+    # To lowercase
+    tokens = tokens.each {|token| token.downcase}
+   
+    # Remove stopwords
+    tokens = tokens - InvertedIndex::Stopwords.words
+
+    # Remove all non-word characters
+    words = []
+    tokens = tokens.each do |token|
+      word = token.gsub(/\W/,'')
+      words << word if !word.empty?
+    end
+    tokens = words
+
+    # TODO: Scan text for special text (e.g. dates, time)
+    # A date looks like /((january|february|march)\s\d,\s\d\d\d\d)/i
+    # A time looks like
+    # 00:00 # 00:00:00 # 00:00:00 a.m. # 00:00:00 p.m. # 00:00:00 pm
+    matches = parser.text.scan(/(\d\d:\d\d(:\d\d)?(\s(a|p)\.?m\.?)?)/i)
+    matches.each {|match| tokens << match[0].downcase.strip}
+ 
+    # Remove all non-ascii words
+    ascii_terms = []
+    tokens.each {|token| ascii_terms << token if token.ascii_only?}
+    tokens = ascii_terms
+
+    # Stem
+    stemmed_terms = []
+    tokens.each {|token| stemmed_terms << token.stem if !token.stem.empty?}
+    tokens = stemmed_terms
+
+    # Yield
+    tokens.each_with_index do |token, index|
+      yield [token, page.docid, index]
+    end
   end
 end
 
-class LinkReducer < Wukong::Streamer::AccumulatingReducer
-  attr_accessor :key_count
-  def start! *args
-    @key_count = 0
+class ParseReducer < Wukong::Streamer::AccumulatingReducer
+  # Process with this key
+  def get_key term, docid, index
+    [term, docid]
   end
 
-  def accumulate(link, count)
-    self.key_count += count.to_i
+  def start! term, docid, index
+    @frequency = 0
+    @positions = []
+  end
+
+  # For every term and docid calculate frequency and index
+  def accumulate term, docid, index
+    @frequency += 1
+    @positions << index
   end
 
   def finalize
-    yield [ key, key_count ]
+    sorted_index_locations = @positions.sort
+    yield [ key, @frequency, sorted_index_locations.join("|") ]
   end
 end
 
-Wukong::Script.new(LinkMapper, nil).run
+#Wukong::Script.new(ParseMapper, nil).run
+Wukong::Script.new(ParseMapper, ParseReducer).run

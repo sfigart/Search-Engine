@@ -26,6 +26,7 @@ end
 # /crawler.rb --run=local ./to_crawl.txt out
 class LinkMapper < Wukong::Streamer::LineStreamer
   def process line
+    File.open('test_mapper.txt', 'a') {|f| f.write(line) }
     begin
       page, links = get_links(line)
       unless page.nil?

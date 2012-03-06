@@ -1,1 +1,8 @@
-Admin index
+<div class="row">
+  <div class="span12">
+    <h2>Dictionary Terms</h2>
+    <% @terms.each do |dict| %>
+      <span><%= dict.term %></span>
+    <% end %>
+  </div>
+</div>

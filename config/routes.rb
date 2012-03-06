@@ -2,6 +2,7 @@ SearchEngine::Application.routes.draw do
   get "search/index"
   get "admin/index"
   get "admin/debug(/:id)" => "admin#debug"
+  get "admin/show(/:id)" => "admin#show"
   root :to => 'search#index'
 
   # The priority is based upon order of creation:

@@ -9,4 +9,7 @@ class Posting
   key :weight, Float
 
   timestamps!
+
+  belongs_to :dictionary
+  belongs_to :page
 end

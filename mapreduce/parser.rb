@@ -35,6 +35,8 @@ class ParseMapper < Wukong::Streamer::LineStreamer
 
     parser = InvertedIndex::Parse.new(page.html)
     parser.parse
+    tokens = InvertedIndex::Cleaner.clean(parser.tokens, parser.text)
+=begin
     tokens = parser.tokens
 
     # To lowercase
@@ -67,7 +69,7 @@ class ParseMapper < Wukong::Streamer::LineStreamer
     stemmed_terms = []
     tokens.each {|token| stemmed_terms << token.stem if !token.stem.empty?}
     tokens = stemmed_terms
-
+=end
     # Yield
     tokens.each_with_index do |token, index|
       yield [token.downcase, page.docid, index]

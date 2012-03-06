@@ -8,4 +8,5 @@ class Dictionary
 
   timestamps!
 
+  many :postings
 end

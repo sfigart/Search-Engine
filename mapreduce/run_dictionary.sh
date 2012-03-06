@@ -30,3 +30,7 @@ rake dictionary:compute_idf
 # Create/Update Postings
 rake postings:generate[term_doc_freq.txt]
 
+# Compute Normalized TFIDF
+rake dictionary:compute_normalized_tfidf
+
+# End

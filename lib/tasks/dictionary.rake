@@ -11,17 +11,13 @@ namespace :dictionary do
     while (line = file.gets)
       term, doc_count, tot_freq = line.chomp.split("\t")
       if Dictionary.exists?(:term => term)
-        # Update
         dictionary = Dictionary.first(:term => term)
-        dictionary.doc_count = doc_count.to_i
-        dictionary.tot_freq = tot_freq.to_i
       else
-        # New
-        dictionary = Dictionary.new(:term => term,
-                                    :doc_count => doc_count.to_i,
-                                    :tot_freq => tot_freq.to_i)
+        dictionary = Dictionary.new(:term => term)
       end
 
+      dictionary.doc_count = doc_count.to_i
+      dictionary.tot_freq = tot_freq.to_i
       dictionary.idf = 0 # Need to recompute in later task
       dictionary.save
     end
@@ -47,11 +43,15 @@ namespace :dictionary do
   task :compute_normalized_tfidf => :environment do
     Dictionary.all.each do |dictionary|
       puts dictionary.term
-      sum_of_squares = 0
-      postings = Posting.where(:term => dictionary.term)
+
       # Sum of squares of tfidf
+      sum_of_squares = 0
+      # TODO: Why does association fail? or why is tfidf nil?
+      #dictionary.postings.each do |posting|
+      postings = Posting.where(:term => dictionary.term)
       postings.each do |posting|
         sum_of_squares += posting.tfidf ** 2
+        puts "\t#{posting.term} #{sum_of_squares}"
       end
 
       # Compute denominator (Sqrt of Squares of tfidf)

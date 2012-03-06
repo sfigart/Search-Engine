@@ -10,6 +10,9 @@ namespace :postings do
     file = File.open(args.filename, 'r')
     while (line = file.gets)
       klass, term, docid, freq, locations = line.chomp.split("\t")
+
+      puts "working on #{term} #{docid}"
+
       if Posting.exists?(:term => term, :docid => docid)
         # Update
         posting = Posting.first(:term => term, :docid => docid)
@@ -22,8 +25,11 @@ namespace :postings do
       posting.locations = locations
 
       # Compute tfidf (term freq * IDF)
-      dict = Dictionary.first(:term => posting.term)
-      posting.tfidf = posting.freq * dict.idf
+      posting.dictionary = Dictionary.first(:term => posting.term)
+      posting.tfidf = posting.freq * posting.dictionary.idf
+
+      # Find corresponding page
+      posting.page = Page.first(:docid => posting.docid)
 
       posting.save
     end

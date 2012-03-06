@@ -18,6 +18,3 @@ hadoop fs -put ./to_parse.txt /user/sfigart/
 
 # Copy results out of hadoop
 hadoop fs -getmerge /user/sfigart/parser term_doc_freq.txt addnl
-
-# Process visited
-#rake crawler:update_visited[links_found.txt]

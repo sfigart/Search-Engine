@@ -14,6 +14,8 @@ class Page
 
   timestamps!
 
+  many :postings
+
   # Returns all models where visited is not true
   def self.not_visited
     Page.all(:visited => [false, nil])

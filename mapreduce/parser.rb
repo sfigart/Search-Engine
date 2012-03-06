@@ -90,16 +90,17 @@ class ParseReducer < Wukong::Streamer::AccumulatingReducer
   def accumulate term, docid, index
     @frequency += 1
     @positions << index
-    Log.info("#{key} Accumulated : #{@positions.join(', ')}")
   end
 
+  # Prefix with term_doc_freq so dictionary job can use struct streamer
   def finalize
-    Log.info ("#{key} finalize : #{@positions.join(', ')}")
-    yield [ key, @frequency, @positions.join("^") ]
+    yield [ "term_doc_freq", key, @frequency, @positions.join("^") ]
   end
 end
 
 # Need to partition AND SORT !!! using term, docid
+# partition to keep same keys on same reducer
+# sort to sort by more than the first value
 Wukong::Script.new(ParseMapper,
                    ParseReducer,
                    :partition_fields => 2,

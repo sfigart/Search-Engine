@@ -21,11 +21,6 @@ end
 
 
 class DictionaryReducer < Wukong::Streamer::AccumulatingReducer
-  # Process with this key
-  def get_key term, docid, frequency, locations
-    term
-  end
-
   def start! term, docid, frequency, locations
     @doc_count = 0
     @tot_freq = 0
@@ -42,4 +37,6 @@ class DictionaryReducer < Wukong::Streamer::AccumulatingReducer
   end
 end
 
-Wukong::Script.new(DictionaryMapper, DictionaryReducer).run
+#Wukong::Script.new(DictionaryMapper, DictionaryReducer).run
+Wukong::Script.new(DictionaryMapper,
+                   DictionaryReducer).run

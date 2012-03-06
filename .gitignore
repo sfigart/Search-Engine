@@ -17,4 +17,5 @@
 # Ignore vi temp files
 *.swo
 *.swp
-
+*.crc
+*.swn

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="span12">
+    <h2>Processed Query</h2>
+    <table class="table">
+      <tr>
+        <th>Term</th>
+        <th>Doc Count</th>
+        <th>Total Frequency</th>
+        <th>IDF</th>
+      </tr>
+    <% results.each do |term, dictionary| %>
+      <tr>
+        <td><%= term %></td>
+        <td><%= dictionary.doc_count %></td>
+        <td><%= dictionary.tot_freq %></td>
+        <td><%= dictionary.idf %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div><!--/row-->

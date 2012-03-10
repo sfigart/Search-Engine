@@ -12,6 +12,11 @@ class SearchController < ApplicationController
     else
       @results = nil
     end
+
+    if params[:q]
+      q = Query.new
+      @ranked_results = q.process(params[:q])
+    end
   end
 
   def search_for(query)

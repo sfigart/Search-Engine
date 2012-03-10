@@ -23,54 +23,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="span12">
-      <h2>Processed Query</h2>
-      <table class="table">
-        <tr>
-          <th>Term</th>
-          <th>Doc Count</th>
-          <th>Total Frequency</th>
-          <th>IDF</th>
-        </tr>
-      <% @results.each do |term, dictionary| %>
-        <tr>
-          <td><%= term %></td>
-          <td><%= dictionary.doc_count %></td>
-          <td><%= dictionary.tot_freq %></td>
-          <td><%= dictionary.idf %></td>
-        </tr>
-      <% end %>
-      </table>
-    </div>
-  </div><!--/row-->
-
-  <div class="row">
-    <div class="span12">
-      <h2>Postings</h2>
-      <table class="table">
-        <tr>
-          <th>#</th>
-          <th>Term</th>
-          <th>docid</th>
-          <th>Frequency</th>
-          <th>tfidf</th>
-          <th>weight</th>
-          <th>locations</th>
-        </tr>
-      <% @postings.each_with_index do |posting, index| %>
-        <tr>
-          <td><%= index+1 %></td>
-          <td><%= posting.term %></td>
-          <td><%= link_to posting.docid, {:controller => 'admin', :action => 'show', :id => posting.docid}, {:target => "_blank"} %></td>
-          <td><%= posting.freq %></td>
-          <td><%= posting.tfidf %></td>
-          <td><%= posting.weight %></td>
-          <td><%= posting.locations %></td>
-        </tr>
-      <% end %>
-      </table>
-    </div>
-  </div><!--/row-->
+  <%= render :partial => 'dictionary', :locals => {:results => @results} %>
+  <%= render :partial => 'ranked_results', :locals => {:ranked_results => @ranked_results} %>
+  <%= render :partial => 'postings', :locals => {:postings => @postings} %>
 
 <% end %>

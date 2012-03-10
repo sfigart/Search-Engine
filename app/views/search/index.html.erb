@@ -1,36 +1,11 @@
 <div class="row">
-  <div class="span12">
-    <%= form_tag '/', :method => "get", :class => 'well form-search' do %>
-      <%= label_tag :q, "Search for :" %>
-      <%= text_field_tag :q, @q, :size => 55, :maxlength => 2048, :class => 'input-large search-query'  %>
-      <%= button_tag " Search", :class => 'btn btn-primary' do  %>
-        <i class="icon-search icon-white"></i> Search
-      <% end %>
-    <% end %>
-  </div>
+  <%= render :partial => 'search_form' %>
 </div><!--/row-->
 
-<% if @ranked_results.present? %>
+<div class="row" id="search_results_message">
+  <%= render :partial => 'search_results_message', :locals => {:message => @message} %>
+</div><!--/row-->
 
-  <div class="row">
-    <div class="span12">
-      Search Results for <%= h @q %>
-    </div>
-  </div><!--/row-->
-
-  <div class="row">
-    <div class="span12">
-      <h2>Original Query</h2>
-      <p><%= @q %></p>
-    </div>
-  </div>
-
-  <%= render :partial => 'ranked_results', :locals => {:ranked_results => @ranked_results} %>
-  <%= render :partial => 'dictionary', :locals => {:results => @results} %>
-<% else %>
-  <div class="row">
-    <div class="span12">
-      No results for <%= h @q %>
-    </div>
-  </div><!--/row-->
-<% end %>
+<div class="row" id="ranked_results">
+  <%= render :partial => 'ranked_results', :locals => {:ranked_results => @ranked_results} if @ranked_results.present? %>
+</div><!--/row-->

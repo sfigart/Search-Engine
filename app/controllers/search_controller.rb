@@ -1,21 +1,9 @@
 class SearchController < ApplicationController
   def index
     if params[:q]
-      @q = params[:q]
-      @results = search_for(@q)
-      @postings = []
-      @results.values.each do |dict|
-        dict.postings.each do |posting|
-          @postings << posting
-        end
-      end
-    else
-      @results = nil
-    end
-
-    if params[:q]
-      q = Query.new
-      @ranked_results = q.process(params[:q])
+      query = Query.new
+      @ranked_results = query.process(params[:q])
+      @message = (@ranked_results.present?) ? "Search results for #{params[:q]}" : "No results found"
     end
   end
 

@@ -1,21 +1,21 @@
-<div class="row">
-  <div class="span12">
-    <h2>Ranked Results</h2>
-    <table class="table">
-      <tr>
-        <th>#</th>
-        <th>docid</th>
-        <th>score</th>
-      </tr>
-    <% ranked_results.each_with_index do |ranking, index| %>
-      <% docid = ranking[0] %>
-      <% score = ranking[1] %>
-      <tr>
-        <td><%= index+1 %></td>
-        <td><%= link_to docid, {:controller => 'page', :action => 'show', :id => docid}, {:target => "_blank"} %></td>
-        <td><%= sprintf("%3.3f",score) %></td>
-      </tr>
-    <% end %>
-    </table>
-  </div>
-</div><!--/row-->
+<% if ranked_results.present? %>
+<div class="span12">
+  <h2>Ranked Results</h2>
+  <table class="table">
+    <tr>
+      <th>#</th>
+      <th>docid</th>
+      <th>score</th>
+    </tr>
+  <% ranked_results.each_with_index do |ranking, index| %>
+    <% docid = ranking[0] %>
+    <% score = ranking[1] %>
+    <tr>
+      <td><%= index+1 %></td>
+      <td><%= link_to docid, {:controller => 'page', :action => 'show', :id => docid}, {:target => "_blank"} %></td>
+      <td><%= sprintf("%3.3f",score) %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
+<% end %>

@@ -1,0 +1,3 @@
+$("#search_results_message").html("<%= escape_javascript(render :partial => 'search_results_message', :locals => {:message => @message}) %>")
+
+$("#ranked_results").html("<%= escape_javascript(render :partial => 'ranked_results', :locals => {:ranked_results => @ranked_results}) %>")

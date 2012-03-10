@@ -55,3 +55,16 @@ Webpage.all(:visited => nil)
 Rails 3 & Mongo
 https://github.com/tyrauber/mongodb-rails3-tutorial
 script/rails generate mongo_mapper:config
+
+Implementation Projects
+
+You will need to electronically submit a compressed file containing your project distribution files and documentation. Your project documentation should contain the following components:
+
+A detailed description of your system (including specific techniques and algorithms you used), and the interaction between the components (make references to code segments, modules, methods, functions, etc. as necessary). If you used any outside sources in your implementation, please clearly indicate which sources, and how and where they were used.
+A complete sample run of your program with description, illustrating how your system works, along with any intermediate input or output used for the sample run.
+Your project distribution files should contain the following:
+
+Complete source code (be sure that your source code is fully documented and easy to read).
+Binary files (e.g., executables, DLLs, Class files) or other components necessary to run your program.
+Readme file containing instructions on how to compile, install, and/or run your program.
+If your application is CGI-based or otherwise has a server component, please provide a URL for a demo version of your system.

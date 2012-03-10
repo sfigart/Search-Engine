@@ -2,13 +2,15 @@
   <div class="span12">
     <%= form_tag '/', :method => "get", :class => 'well form-search' do %>
       <%= label_tag :q, "Search for :" %>
-      <%= text_field_tag :q, nil, :size => 55, :maxlength => 2048  %>
-      <%= submit_tag "Search"  %>
+      <%= text_field_tag :q, @q, :size => 55, :maxlength => 2048, :class => 'input-large search-query'  %>
+      <%= button_tag " Search", :class => 'btn btn-primary' do  %>
+        <i class="icon-search icon-white"></i> Search
+      <% end %>
     <% end %>
   </div>
 </div><!--/row-->
 
-<% if @results.present? %>
+<% if @ranked_results.present? %>
 
   <div class="row">
     <div class="span12">
@@ -23,8 +25,12 @@
     </div>
   </div>
 
-  <%= render :partial => 'dictionary', :locals => {:results => @results} %>
   <%= render :partial => 'ranked_results', :locals => {:ranked_results => @ranked_results} %>
-  <%= render :partial => 'postings', :locals => {:postings => @postings} %>
-
+  <%= render :partial => 'dictionary', :locals => {:results => @results} %>
+<% else %>
+  <div class="row">
+    <div class="span12">
+      No results for <%= h @q %>
+    </div>
+  </div><!--/row-->
 <% end %>

@@ -23,5 +23,19 @@ class AdminController < ApplicationController
       @page = Page.first(:docid => docid)
     end
   end
+
+  def sim
+    @query_terms = ['zynga']
+    @query_terms.each do |term|
+      @tw = {}
+      @dictionary = Dictionary.first(:term => term)
+      @dictionary.postings.each do |posting|
+        if 
+
+      end
+    end
+
+  end
+
 end
 

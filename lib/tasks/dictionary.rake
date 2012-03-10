@@ -37,30 +37,4 @@ namespace :dictionary do
       dictionary.update_attribute(:idf, idf)
     end
   end
-
-
-  desc 'Compute normalized tfidf for all postings by dictionary'
-  task :compute_normalized_tfidf => :environment do
-    Dictionary.all.each do |dictionary|
-      puts dictionary.term
-
-      # Sum of squares of tfidf
-      sum_of_squares = 0
-      # TODO: Why does association fail? or why is tfidf nil?
-      #dictionary.postings.each do |posting|
-      postings = Posting.where(:term => dictionary.term)
-      postings.each do |posting|
-        sum_of_squares += posting.tfidf ** 2
-        puts "\t#{posting.term} #{sum_of_squares}"
-      end
-
-      # Compute denominator (Sqrt of Squares of tfidf)
-      denom = Math.sqrt(sum_of_squares)
-
-      # Update with normalized tfidf in weight field
-      postings.each do |posting|
-        posting.update_attribute(:weight, posting.tfidf / denom.to_f)
-      end
-    end
-  end
 end

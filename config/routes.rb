@@ -1,6 +1,7 @@
 SearchEngine::Application.routes.draw do
   get "search/index"
   get "admin/index"
+  get "admin/sim" => "admin#sim"
   get "admin/debug(/:id)" => "admin#debug"
   get "admin/show(/:id)" => "admin#show"
   root :to => 'search#index'

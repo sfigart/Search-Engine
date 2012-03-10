@@ -37,6 +37,5 @@ class DictionaryReducer < Wukong::Streamer::AccumulatingReducer
   end
 end
 
-#Wukong::Script.new(DictionaryMapper, DictionaryReducer).run
 Wukong::Script.new(DictionaryMapper,
                    DictionaryReducer).run

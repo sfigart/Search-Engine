@@ -2,6 +2,7 @@
 # change this substantially
 class Page
   include MongoMapper::Document
+  plugin MongoMapper::Plugins::IdentityMap
 
   key :docid, String
   key :name, String
@@ -11,6 +12,8 @@ class Page
   key :last_visited_status_code
   key :html, String
   key :indexed, Boolean
+
+  key :vector_length, Float
 
   timestamps!
 

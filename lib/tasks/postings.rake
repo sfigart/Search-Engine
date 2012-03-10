@@ -6,7 +6,7 @@ namespace :postings do
 
     puts "Generating postings from #{args.filename}"
 
-    # Read each line from dictionary.txt
+    # Read each line from input (term_doc_freq.txt)
     file = File.open(args.filename, 'r')
     while (line = file.gets)
       klass, term, docid, freq, locations = line.chomp.split("\t")

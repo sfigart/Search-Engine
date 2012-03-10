@@ -15,6 +15,10 @@ class SearchController < ApplicationController
   end
 
   def search_for(query)
+
+    # See ~/code/csc575/assignment3/problem1.rb for 
+    # dot product and cosine similarity computation
+    
     search_terms = query.split(' ')
 
     # Lex the terms

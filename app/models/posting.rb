@@ -1,5 +1,6 @@
 class Posting
   include MongoMapper::Document
+  plugin MongoMapper::Plugins::IdentityMap
 
   key :term, String
   key :docid, String

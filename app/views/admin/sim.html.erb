@@ -1,0 +1,9 @@
+<div style="border: 1px solid #aaa;">
+  Query Terms: <%= @query_terms.join(',') %>
+  <br>
+  Dictionary : <%= @dictionary.term %>
+  <br>
+  Postings Size : <%= @dictionary.postings.size %>
+  <br>
+  Term IDF: <%= @dictionary.idf %>
+</div>

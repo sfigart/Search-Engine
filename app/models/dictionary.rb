@@ -17,7 +17,7 @@ class Dictionary
         logger.info("Skipping #{dict.term}, already in cache")
       else
         logger.info("adding #{dict.term} to cache")
-        Rails.cache.write(dict.term, dict)
+        Rails.cache.write(dict.term, [dict.term, dict.doc_count, dict.tot_freq, dict.idf ])
       end
     end
   end

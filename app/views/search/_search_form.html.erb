@@ -1,7 +1,7 @@
 <div class="span12">
   <%= form_tag search_index_path, :method => "get", :class => 'well form-search', :remote => true do %>
     <%= label_tag :q, "Search for :" %>
-    <%= text_field_tag :q, @q, :size => 55, :maxlength => 2048, :class => 'input-super-large search-query'  %>
+    <%= text_field_tag :q, q, :size => 55, :maxlength => 2048, :class => 'input-super-large search-query'  %>
     <%= button_tag " Search", :class => 'btn btn-primary' do  %>
       <i class="icon-search icon-white"></i> Search
     <% end %>

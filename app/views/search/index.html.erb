@@ -1,5 +1,5 @@
 <div class="row">
-  <%= render :partial => 'search_form' %>
+  <%= render :partial => 'search_form', :locals => {:q => @q} %>
 </div><!--/row-->
 
 <div class="row" id="search_results_message">

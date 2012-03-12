@@ -26,7 +26,6 @@ end
 # /crawler.rb --run=local ./to_crawl.txt out
 class LinkMapper < Wukong::Streamer::LineStreamer
   def process line
-    File.open('test_mapper.txt', 'a') {|f| f.write(line) }
     begin
       page, links = get_links(line)
       unless page.nil?
@@ -37,7 +36,10 @@ class LinkMapper < Wukong::Streamer::LineStreamer
           yield [link, 1]
         end
       end
-    rescue Exception
+    rescue Exception => e
+      Log.error " ~~~~~~~ EXCEPTION ~~~~~ " 
+      Log.error e.message
+      Log.error e.backtrace
     end
   end
 
@@ -46,7 +48,9 @@ class LinkMapper < Wukong::Streamer::LineStreamer
     MongoMapper.database = 'search_engine_development'
     page_db = Page.first(:url => url)
 
-    page_db.html = page.body
+    # Convert html body to utf-8 to resolve mongo string not valid utf-8 exceptions
+    #doc.content.encode!('UTF-8', encoding)
+    page_db.html = page.body.encode('UTF-8', page.encoding)
     page_db.docid = Digest::SHA1.hexdigest(url)
     page_db.visited = true
     page_db.last_visited = Time.now.utc
@@ -55,6 +59,7 @@ class LinkMapper < Wukong::Streamer::LineStreamer
 
   def get_links(url)
     agent = Mechanize.new
+    agent.user_agent = 'Mac Safari'
     page = agent.get(url)
     base_url = page.uri.to_s.gsub(/\/$/,'') # Remove the trailing slash
     links = []
@@ -79,7 +84,7 @@ class LinkMapper < Wukong::Streamer::LineStreamer
   end
 
   def is_ad?(url)
-    ad_sites = [ 'http://yellowpages', 'http://ad.doubleclick', 'https://www.surveymonkey', ]
+    ad_sites = [ 'http://yellowpages', 'http://ad.doubleclick', 'https://www.surveymonkey', 'http://googleads.g.doubleclick' ]
     ad_sites.any? {|w| url =~ /#{w}/}
   end
 

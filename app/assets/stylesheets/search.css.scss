@@ -1,6 +1,26 @@
 // Place all the styles related to the search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Twitter bootstrap enhancements
 .input-super-large {
   width: 50%;
+}
+
+
+// Highlight search terms in results 
+em {
+  font-weight: bold;
+  font-style: normal;
+}
+cite {
+  color: #093;
+}
+#ranked_results {
+  ol {
+    list-style-type: none;
+    li {
+      margin-bottom: 20px;
+    }
+  }
 }

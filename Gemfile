@@ -52,3 +52,7 @@ gem 'twitter-bootstrap-rails'
 
 gem 'inverted_index'
 gem 'hpricot'
+
+# For pagination
+#gem 'paginator', '~>1.1.1'
+#gem 'kaminari', '~>0.13.0'

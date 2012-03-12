@@ -39,7 +39,8 @@ class ParseMapper < Wukong::Streamer::LineStreamer
 
     # Yield
     tokens.each_with_index do |token, index|
-      yield [token.downcase, page.docid, index]
+      # Only keep tokens that are 3 characters or more
+      yield [token.downcase, page.docid, index] if token.size >= 3 
     end
   end
 end

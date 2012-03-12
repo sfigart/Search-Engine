@@ -4,7 +4,8 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 SearchEngine::Application.initialize!
 
-if defined?(Rails::Console)
+# Dont load rails cache if rails console or a rake task
+if defined?(Rails::Console) || File.basename($0) == "rake"
   # do nothing
   Rails.logger.info("Skipping Dictionary initialization")
 else

@@ -6,13 +6,9 @@ namespace :parser do
 
     puts "Writing pages to parse to #{args.filename}"
 
-    docids = []
-    pages = Page.not_indexed
-    pages.each {|page| docids << page.docid}
-
-    # TODO: Remove [0..1000] limit!!
     file = File.open(args.filename, 'w')
-    docids[0..100].each {|docid| file.puts docid}
+    pages = Page.not_indexed
+    pages.each {|page| file.puts page.docid}
     file.close
   end
 

@@ -8,6 +8,7 @@ class Posting
   key :locations, String
   key :tfidf, Float
   key :weight, Float
+  key :excerpts, Array
 
   timestamps!
 

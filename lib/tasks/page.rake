@@ -25,4 +25,18 @@ namespace :page do
       puts "#{page.vector_length}\t#{page.indexed}\t#{page.postings.count}\t#{docid}"
     end
   end
+
+  desc 'Populate name attribute from html title element'
+  task :create_name_from_title => :environment do
+    puts "Create name from title"
+    pages = Page.where(:indexed => true)
+    pages.each do |page|
+      doc = Hpricot(page.html)
+      title = (doc/"title").inner_text.chomp.strip
+      if !title.blank?
+        puts "Updated page with this title #{title} - #{page.url}"
+        page.update_attribute(:name, title)
+      end
+    end
+  end
 end

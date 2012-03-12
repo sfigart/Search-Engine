@@ -1,0 +1,27 @@
+<% if results.present? %>
+  <div class="span12">
+    <ol>
+      <% results.each do |result| %>
+        <% docid = result[0] %>
+        <% score = result[1] %>
+        <% page = Page.first(:docid => docid) %>
+        <li>
+          <div>
+            <h3><%= link_to page.name, page.url %></h3>
+          </div>
+          <div>
+            <div>
+              <cite><%= page.url %></cite>
+            </div>
+            <span><%= get_excerpt(docid, @postings) %>
+            </span>
+            <div class="alert alert-info" style="display:none;">
+              <span>Score: <%= sprintf("%3.3f", score) %></span> |
+              <span>Docid:  <%= link_to docid, {:controller => 'page', :action => 'show', :id => docid}, {:target => "_blank"} %></span>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>

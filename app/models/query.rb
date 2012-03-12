@@ -1,4 +1,6 @@
 class Query
+  attr_accessor :postings
+
   # Algorithm from implementation.ppt slide 18
   def process(raw_query_terms)
     terms = analyze_terms(raw_query_terms) 
@@ -16,8 +18,8 @@ class Query
       q << w           # save the weight for later
 
       # Compute posting tf x idf
-      postings = Posting.where(:term => term)
-      postings.each do |posting|
+      @postings = Posting.where(:term => term)
+      @postings.each do |posting|
         d = posting.docid
         c = posting.freq # term frequency of T in D
         if r.has_key?(d)

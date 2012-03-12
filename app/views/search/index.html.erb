@@ -3,9 +3,9 @@
 </div><!--/row-->
 
 <div class="row" id="search_results_message">
-  <%= render :partial => 'search_results_message', :locals => {:message => @message} %>
+  <%= render :partial => 'search_results_message', :locals => {:message => @message} if @message %>
 </div><!--/row-->
 
 <div class="row" id="ranked_results">
-  <%= render :partial => 'ranked_results', :locals => {:ranked_results => @ranked_results} if @ranked_results.present? %>
+  <%= render :partial => 'results', :locals => {:results => @ranked_results} if @ranked_results.present? %>
 </div><!--/row-->

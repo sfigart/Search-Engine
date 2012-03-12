@@ -33,4 +33,10 @@ rake postings:generate[term_doc_freq.txt]
 # Compute page vector lengths
 rake page:compute_vector_length
 
+# Update page with html title
+rake page:create_name_from_title
+
+# Generate excerpts for postings
+rake postings:create_excerpts
+
 # End

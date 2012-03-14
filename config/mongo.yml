@@ -10,9 +10,11 @@ test:
   <<: *defaults
   database: search_engine_test
 
-# set these environment variables on your prod server
 production:
-  <<: *defaults
-  database: search_engine
-  username: <%= ENV['MONGO_USERNAME'] %>
-  password: <%= ENV['MONGO_PASSWORD'] %>
+  uri: <%= ENV['MONGOHQ_URL'] %>
+# set these environment variables on your prod server
+#production:
+#  <<: *defaults
+#  database: search_engine
+#  username: < %= ENV['MONGO_USERNAME'] % >
+#  password: < %= ENV['MONGO_PASSWORD'] % >

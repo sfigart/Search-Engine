@@ -50,9 +50,9 @@ gem 'stemmify', '~>0.0.2'
 # Bootstrap
 gem 'twitter-bootstrap-rails'
 
-gem 'inverted_index'
+gem 'inverted_index', '~>0.0.1'
 gem 'hpricot'
 
-# For pagination
-#gem 'paginator', '~>1.1.1'
-#gem 'kaminari', '~>0.13.0'
+group :production do
+  gem 'pg'
+end

@@ -53,8 +53,6 @@ class Page
         regex = Regexp.new(term, Regexp::IGNORECASE )
         if regex =~ text
           snippets << excerpt(text, term, *args)
-          #snippets << highlight(snippet, terms, :highlighter => '<em>\1</em>')
-          #break # exit on first match of any term
         else
           logger.warn "NO MATCH on #{term}!!!"
           logger.warn text

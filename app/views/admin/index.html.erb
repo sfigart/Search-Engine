@@ -1,8 +1,35 @@
 <div class="row">
   <div class="span12">
-    <h2>Dictionary Terms</h2>
+    <h2>Dictionary Terms for <%= @alpha %></h2>
+
+    <div class = "alpha">
+      <%= alpha_links('index') %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <%= will_paginate @terms %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
     <% @terms.each do |dict| %>
-      <span><%= dict.term %></span>
+      <div class="well span2">
+        <dt><span><%= dict.term %><span></dt>
+          <dd>Doc count: <%= dict.doc_count %></dd>
+          <dd>Total freq: <%= dict.tot_freq %></dd>
+          <dd>IDF: <%= sprintf "%3.3f", dict.idf %></dd>
+        </dl>
+      </div>
     <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <%= will_paginate @terms %>
   </div>
 </div>

@@ -1,8 +1,26 @@
 <div class="row">
-  <div class="span6">
-    <%= @html.text %>
-  </div>
-  <div class="span6">
-    <%= raw @html.html %>
+  <div class="span12">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#text" data-toggle="tab">Text</a></li>
+      <li><a href="#html" data-toggle="tab">HTML</a></li>
+      <li><a href="#cache" data-toggle="tab">Cache</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="text">
+        <pre>
+          <%= @html.text %>
+        </pre>
+      </div>
+      <div class="tab-pane" id="html">
+        <pre>
+          <%= @html.html.strip %>
+        </pre>
+      </div>
+      <div class="tab-pane" id="cache">
+        <p>This has no javascript or stylesheets</p>
+        <%= raw @html.html.strip %>
+      </div>
+    </div>
   </div>
 </div>

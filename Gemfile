@@ -53,8 +53,13 @@ gem 'twitter-bootstrap-rails'
 gem 'inverted_index', '~>0.0.1'
 gem 'hpricot'
 
+# Heroku requires Postgre sql
 group :production do
   gem 'pg'
 end
 
+# Heroku preferred web server
 gem 'thin'
+
+gem 'will_paginate'
+gem 'bootstrap-will_paginate', '~> 0.0.6'

@@ -16,7 +16,7 @@
             <span><%= get_excerpt(docid, @postings) %>
             </span>
             <div class="alert alert-info" style="display:none;">
-              <span>Score: <%= sprintf("%3.9f", score) %></span> |
+              <span>Score: <%= sprintf("%3.3f", score) %></span> |
               <span>Docid:  <%= link_to docid, {:controller => 'page', :action => 'show', :id => docid}, {:target => "_blank"} %></span>
             </div>
           </div>

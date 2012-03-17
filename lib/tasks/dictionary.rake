@@ -37,4 +37,10 @@ namespace :dictionary do
       dictionary.update_attribute(:idf, idf)
     end
   end
+
+  desc 'Refresh cache'
+  task :refresh_cache => :environment do
+    puts 'refreshing cache'
+    Dictionary.initialize_cache
+  end
 end

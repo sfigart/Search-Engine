@@ -50,7 +50,7 @@ gem 'stemmify', '~>0.0.2'
 # Bootstrap
 gem 'twitter-bootstrap-rails'
 
-gem 'inverted_index', '~>0.0.1'
+gem 'inverted_index', '~>0.0.3'
 gem 'hpricot'
 
 # Heroku requires Postgre sql

@@ -19,3 +19,6 @@
 *.swp
 *.crc
 *.swn
+
+# Ignore mac related files
+.DS_Store

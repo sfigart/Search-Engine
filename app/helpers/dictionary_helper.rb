@@ -1,4 +1,4 @@
-module AdminHelper
+module DictionaryHelper
   def alpha_links(action)
     links  = []
     # Create index for 0 through 9

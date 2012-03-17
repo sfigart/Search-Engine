@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class DictionaryController < ApplicationController
   def index
     @alpha = params[:alpha] || 'a'
     regex = Regexp.new("^#{@alpha}", Regexp::IGNORECASE)

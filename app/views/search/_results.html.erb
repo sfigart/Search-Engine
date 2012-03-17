@@ -13,9 +13,9 @@
             <div>
               <cite><%= page.url %></cite>
             </div>
-            <span><%= get_excerpt(docid, @postings) %>
+            <span><%= raw get_excerpt(docid, @postings) %>
             </span>
-            <div class="alert alert-info" style="display:none;">
+            <div class="alert alert-info">
               <span>Score: <%= sprintf("%3.3f", score) %></span> |
               <span>Docid:  <%= link_to docid, {:controller => 'page', :action => 'show', :id => docid}, {:target => "_blank"} %></span>
             </div>
